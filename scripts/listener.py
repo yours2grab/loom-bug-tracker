@@ -118,7 +118,9 @@ def process_message(cfg, event):
         basecamp_todos.notify_team(cfg, len(all_bugs), [reporter])
         print(f"  Team notified. {len(all_bugs)} bug(s) logged.")
     else:
-        print("  No bugs extracted from this message.")
+        # Forward to team so nothing gets missed
+        basecamp_todos.forward_message(cfg, reporter, text, permalink)
+        print("  No bugs extracted. Message forwarded to team.")
 
     mark_processed(ts)
 
@@ -170,11 +172,19 @@ def main():
 
     socket_client.connect()
 
-    # Keep alive
+    # Keep alive with auto-reconnect
     import time
     try:
         while True:
-            time.sleep(1)
+            time.sleep(10)
+            if not socket_client.is_connected():
+                print(f"Connection lost at {datetime.now().strftime('%H:%M:%S')}. Reconnecting...")
+                try:
+                    socket_client.connect()
+                    print("Reconnected.")
+                except Exception as e:
+                    print(f"Reconnect failed: {e}. Retrying in 30s...")
+                    time.sleep(30)
     except KeyboardInterrupt:
         print("\nShutting down.")
         socket_client.close()
