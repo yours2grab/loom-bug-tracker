@@ -14,6 +14,7 @@ def create_todo(bug, config):
     token = config["basecamp_oauth_token"]
     vinod_id = config["basecamp_vinod_id"]
     virgil_id = config["basecamp_virgil_id"]
+    victor_id = config["basecamp_victor_id"]
 
     title = f"Bug: {bug['title']}"
     description = (
@@ -33,7 +34,7 @@ def create_todo(bug, config):
         json={
             "content": title,
             "description": description,
-            "assignee_ids": [int(vinod_id), int(virgil_id)],
+            "assignee_ids": [int(vinod_id), int(virgil_id), int(victor_id)],
         },
     )
     resp.raise_for_status()

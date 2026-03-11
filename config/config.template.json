@@ -12,6 +12,8 @@
   "basecamp_oauth_token": "",
   "basecamp_vinod_id": "",
   "basecamp_virgil_id": "",
+  "basecamp_victor_id": "",
   "anthropic_api_key": "",
-  "report_output_path": ""
+  "report_output_path": "",
+  "slack_app_token": ""
 }

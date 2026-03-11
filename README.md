@@ -1,13 +1,13 @@
 # Loom Bug Tracker
 
-A Python pipeline that automatically scans Slack for bug reports, extracts bugs using Claude, creates Basecamp to-dos, and notifies the team. Designed to run hourly via cron or Claude Code skill.
+A Python pipeline that automatically detects bug reports in Slack, extracts bugs using Claude, creates Basecamp to-dos, and notifies the team. Supports both real-time listening (Socket Mode) and manual/scheduled runs.
 
 ## What It Does
 
 1. Scans `#bugs-and-feedback` Slack channel for unprocessed messages
 2. Pulls Loom transcripts from any Loom URLs found in messages
 3. Extracts bugs using Claude AI (title, description, reporter, severity)
-4. Creates one Basecamp to-do per bug, assigned to Vinod and Virgil
+4. Creates one Basecamp to-do per bug, assigned to Virgil, Vinod, and Victor
 5. Replies to the original reporter in-thread: "Got it, logged in Basecamp"
 6. DMs Virgil, Vinod, and Victor with a run summary
 7. Saves a markdown report to the bug reports folder
@@ -40,11 +40,12 @@ Slack #bugs-and-feedback
 
 | File | Purpose |
 |------|---------|
-| `scripts/main.py` | Orchestrator. Runs the full pipeline end-to-end. |
+| `scripts/listener.py` | **Real-time listener.** Connects via Slack Socket Mode, processes messages instantly when posted. Recommended for production use. |
+| `scripts/main.py` | **Batch orchestrator.** Runs the full pipeline on-demand (scans all unprocessed messages). Use for manual/scheduled runs. |
 | `scripts/scan_slack.py` | Reads `#bugs-and-feedback`, filters out processed messages, extracts Loom URLs. |
 | `scripts/loom_transcript.py` | Fetches Loom video transcripts from public share pages. |
 | `scripts/extract_bugs.py` | Sends message/transcript to Claude API. Returns structured bugs with title, description, reporter, severity (Critical/High/Medium/Low). |
-| `scripts/basecamp_todos.py` | Creates Basecamp to-dos, posts thread replies to reporters, DMs team summary. |
+| `scripts/basecamp_todos.py` | Creates Basecamp to-dos (assigned to Virgil, Vinod, Victor), posts thread replies to reporters, DMs team summary. |
 
 ## Setup
 
@@ -64,15 +65,33 @@ cp config/config.template.json config/config.json
 
 Required fields:
 - `slack_token` — Slack bot token with channels:history, chat:write, users:read scopes
+- `slack_app_token` — Slack app-level token (xapp-) for Socket Mode
 - `slack_channel_id` — The `#bugs-and-feedback` channel ID
 - `slack_virgil_id`, `slack_vinod_id`, `slack_victor_id` — Slack user IDs for DM notifications
 - `basecamp_account_id`, `basecamp_project_id`, `basecamp_todolist_id` — Basecamp project details
 - `basecamp_oauth_token` — Basecamp OAuth token
-- `basecamp_vinod_id`, `basecamp_virgil_id` — Basecamp person IDs for to-do assignment
+- `basecamp_vinod_id`, `basecamp_virgil_id`, `basecamp_victor_id` — Basecamp person IDs for to-do assignment
 - `anthropic_api_key` — Claude API key for bug extraction
 - `report_output_path` — Local path for markdown bug reports
 
-### 3. Run
+### 3. Run (Real-time Listener)
+
+```bash
+cd ~/.claude/skills/loom-bug-tracker
+pip install slack_sdk
+python scripts/listener.py
+```
+
+This connects via Socket Mode and processes messages instantly. Requires `message.channels` event subscription enabled in your Slack app and Socket Mode turned on.
+
+**Run as macOS background service:**
+
+```bash
+# Copy the Launch Agent plist to ~/Library/LaunchAgents/
+launchctl load ~/Library/LaunchAgents/com.sucana.bug-tracker.plist
+```
+
+### 3b. Run (Manual/Batch)
 
 ```bash
 cd ~/.claude/skills/loom-bug-tracker && python scripts/main.py
