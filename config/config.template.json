@@ -1,0 +1,17 @@
+{
+  "slack_token": "",
+  "slack_channel_id": "",
+  "slack_virgil_id": "",
+  "slack_vinod_id": "",
+  "slack_victor_id": "",
+  "slack_carlos_id": "",
+  "loom_api_key": "",
+  "basecamp_account_id": "",
+  "basecamp_project_id": "",
+  "basecamp_todolist_id": "",
+  "basecamp_oauth_token": "",
+  "basecamp_vinod_id": "",
+  "basecamp_virgil_id": "",
+  "anthropic_api_key": "",
+  "report_output_path": ""
+}

@@ -1,0 +1,5 @@
+config/config.json
+data/processed_messages.txt
+venv/
+__pycache__/
+*.pyc
