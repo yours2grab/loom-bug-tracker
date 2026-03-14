@@ -127,3 +127,7 @@ Reports save to the configured `report_output_path`.
 ## Install as Claude Code Skill
 
 Drop the entire `loom-bug-tracker/` folder into `~/.claude/skills/`.
+
+## Credits
+
+Built by Virgil Brewster at [Sucana](https://sucana.ai) — AI-powered tools for B2B SaaS teams.
