@@ -11,7 +11,7 @@ SEVERITY_RULES = """
 - Low: UI issue, visual glitch, or typo
 """
 
-EXTRACTION_PROMPT = """You are a bug extraction assistant for Sucana, a B2B SaaS analytics platform.
+EXTRACTION_PROMPT = """You are a bug extraction assistant for a B2B SaaS analytics platform.
 
 Extract all distinct bugs from the following content. Return a JSON array of bug objects.
 

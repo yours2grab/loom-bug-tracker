@@ -58,7 +58,7 @@ def create_todo(bug, config):
         headers={
             "Authorization": f"Bearer {token}",
             "Content-Type": "application/json",
-            "User-Agent": "LoomBugTracker (support@sucana.ai)",
+            "User-Agent": "LoomBugTracker (virgil@virgilbrewster.com)",
         },
         json={
             "content": title,

@@ -18,7 +18,7 @@ The script will:
 4. Create one Basecamp to-do per bug, assigned to Vinod and Virgil
 5. Thread reply to the original reporter: "Got it — logged in Basecamp. We're on it. 🐛"
 6. DM Virgil, Vinod, and Victor with a run summary
-7. Save a markdown report to Sucana/Product/Bug Reports/
+7. Save a markdown report to Product/Bug Reports/
 8. Log processed message timestamps to avoid duplicates
 
 If there are no new messages, it exits silently.

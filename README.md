@@ -88,7 +88,7 @@ This connects via Socket Mode and processes messages instantly. Requires `messag
 
 ```bash
 # Copy the Launch Agent plist to ~/Library/LaunchAgents/
-launchctl load ~/Library/LaunchAgents/com.sucana.bug-tracker.plist
+launchctl load ~/Library/LaunchAgents/com.virgil.bug-tracker.plist
 ```
 
 ### 3b. Run (Manual/Batch)
@@ -130,7 +130,7 @@ Drop the entire `loom-bug-tracker/` folder into `~/.claude/skills/`.
 
 ## Credits
 
-Built by Virgil Brewster at [Sucana](https://sucana.ai) — AI-powered tools for B2B SaaS teams.
+Built by Virgil Brewster.
 
 ---
 
@@ -138,6 +138,6 @@ Built by Virgil Brewster at [Sucana](https://sucana.ai) — AI-powered tools for
 
 Every Friday, one real AI workflow from inside our build. No theory. No hype. Just what worked, what flopped, and what we'd do differently.
 
-[Join The Lead →](https://sucana.ai/newsletter)
+[Join The Launch Room →](https://virgilbrewster.com/newsletter)
 
-Built by [Virgil Brewster](https://www.linkedin.com/in/virgilbrewster/) at [Sucana](https://sucana.ai)
+Built by [Virgil Brewster](https://www.linkedin.com/in/virgilbrewster/)
